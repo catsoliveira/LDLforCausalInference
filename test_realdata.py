@@ -9,7 +9,7 @@ def compact_X(X):
     return [[x] for x in X]
 
 def test_temperature():
-    data = pd.read_csv('real_data/pairs/pair0042.txt', sep='\t', header=None)
+    data = pd.read_csv('real_data/pair0042.txt', sep='\t', header=None)
     data[0] = pd.cut(x = data[0], bins = [0,31,59,90,120,151,181,212,243,273,304,334,366],labels = [0, 1, 2, 3,4,5,6,7,8,9,10,11])
     data[1] = data[1].round()
     data[1] = data[1].astype(int)
@@ -93,8 +93,9 @@ def test_bridges():
         scores.append(score)
     return scores
         
-        
+  
 #print(test_adult())
 #print(test_inflammation())
-print(test_bridges())
+#print(test_bridges())
 #print(test_horsecolic())
+print(test_temperature())

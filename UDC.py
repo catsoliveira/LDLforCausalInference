@@ -11,8 +11,8 @@ class UDC:
         NN = self.count_matrix(data)
         self.N = [NN, NN.transpose()]
         self.N_xy = [self.count_variable(data, 0), self.count_variable(data, 1)]
-        self.cause = 0 
-        self.effect = 1
+        self.cause = 0  #comment this to run find_best_direction
+        self.effect = 1 #comment this to run find_best_direction
     
     def states_variables(self, data): #returns the states of each variable X and Y
         rs= [sorted(data[column].unique()) for column in list(data.columns)]

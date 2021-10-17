@@ -42,6 +42,7 @@ def test_performance():
                     probabilities = generator[2]
                 condprob_estimate = UDC(data).estimate_UDC(data, ['no','no'])
                 score_KL += kl_divergence(condprob_true, condprob_estimate, probabilities)
+                print(score_KL)
             average_KL[N] = score_KL/50
         KL[val] = average_KL
     return KL
@@ -74,7 +75,7 @@ def test_causality():
                 while any(len(t)!=val for t in [data[column].unique() for column in list(data.columns)]):
                     generator = DataGenerator().getinstances(instances, [val,val])
                     data = generator[0]
-                scores = UDC(data).find_best_direction(data, ['no','cyclic'])
+                scores = UDC(data).find_best_direction(data, ['no','no']) #change to cyclic to run CUDC
                 if scores[0]<scores[1]:
                     times_rightdirection+=1
             prob_right = times_rightdirection/100
@@ -113,7 +114,7 @@ def test_causality_difsup():
                     generator = DataGenerator().getinstances(instances, [val[0],val[1]])
                     data = generator[0]
                     col = [len(data[column].unique()) for column in list(data.columns)]
-                scores = UDC(data).find_best_direction(data, ['no','no'])
+                scores = UDC(data).find_best_direction(data, ['no','no']) #change to cyclic to run CUDC
                 if scores[0]<scores[1]:
                     times_rightdirection+=1
             prob_right = times_rightdirection/100
@@ -166,7 +167,7 @@ def test_performance1():
                     col = [len(data[column].unique()) for column in list(data.columns)]
                 print("true")
                 print(condprob_true)
-                condprob_estimate = UDC(data).estimate_UDC(data, ['no','cyclic'])
+                condprob_estimate = UDC(data).estimate_UDC(data, ['no','no']) #change to cyclic to run CUDC
                 score_KL += kl_divergence(condprob_true, condprob_estimate, probabilities)
             average_KL[N] = score_KL/50
         KL[tuple(val)] = average_KL
@@ -175,5 +176,5 @@ def test_performance1():
     
 
 
-print(test_performance())
+print(plot_causality_difsup())
 

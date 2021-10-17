@@ -103,9 +103,6 @@ def test_benchmark():
             res_hcr.append(True)
         else:
             res_hcr.append(False) 
-        print(res_dc)
-        print(res_dsc)
-        print(res_hcr)
             
     ind_dsc = np.argsort(diff_dsc)[::-1]
     ind_dc = np.argsort(diff_dc)[::-1]
